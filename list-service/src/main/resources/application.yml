@@ -1,0 +1,92 @@
+spring:
+  application:
+    name: list-service
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  profiles:
+    active: desktop # Default profile
+
+server:
+  port: 8082
+
+---
+spring:
+  config:
+    activate:
+      on-profile: desktop
+
+  web:
+    cors:
+      allowed-origins: "http://localhost:8080"
+      allowed-methods: "*"
+      allowed-headers: "*"
+      allow-credentials: true
+
+  jpa: 
+    show-sql: true
+    generate-ddl: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/to_do_list_db # property overode when running test container
+    username: to_do_list_db_service_user # property overode when running test container
+    password: to_do_list_db_service_password # property overode when running test container
+    driver-class-name: org.postgresql.Driver # property overode when running test container
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  web:
+    cors:
+      allowed-origins: "http://localhost:8080"
+      allowed-methods: "*"
+      allowed-headers: "*"
+      allow-credentials: true
+
+  jpa: 
+    show-sql: true
+    generate-ddl: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+  datasource:
+    url: jdbc:postgresql://to-do-list-db:5432/to_do_list_db
+    username: to_do_list_db_service_user
+    password: to_do_list_db_service_password
+    driver-class-name: org.postgresql.Driver
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+
+  web:
+    cors:
+      allowed-origins: "http://localhost:8080"
+      allowed-methods: "*"
+      allowed-headers: "*"
+      allow-credentials: true
+
+  jpa: 
+    show-sql: true
+    generate-ddl: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+  datasource:
+    url: jdbc:tc:postgresql:15:///to_do_list_db
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver

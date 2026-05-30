@@ -1,0 +1,128 @@
+{
+  "consumer": {
+    "name": "ToDoListUi"
+  },
+  "interactions": [
+    {
+      "description": "GET /forecast: GetForecastSummary",
+      "key": "e1416f3d",
+      "pending": false,
+      "providerStates": [
+        {
+          "name": "ForecastExist"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/forecast"
+      },
+      "response": {
+        "body": {
+          "content": [
+            {
+              "detailedForecast": "Mostly clear, with a low around 19. North northwest wind 5 to 15 mph, with gusts as high as 30 mph.",
+              "name": "Tonight",
+              "temperature": 19,
+              "windSpeed": "5 to 15 mph"
+            }
+          ],
+          "contentType": "application/json",
+          "encoded": false
+        },
+        "headers": {
+          "Content-Type": [
+            "application/json"
+          ]
+        },
+        "matchingRules": {
+          "body": {
+            "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$[*].detailedForecast": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$[*].name": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$[*].temperature": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ]
+            },
+            "$[*].windSpeed": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      },
+      "transport": "http",
+      "type": "Synchronous/HTTP"
+    },
+    {
+      "description": "GET /forecast/test: GetTestEndpoint",
+      "key": "f8ca9aaf",
+      "pending": false,
+      "providerStates": [
+        {
+          "name": "WeatherServiceTest"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/forecast/test"
+      },
+      "response": {
+        "body": {
+          "content": "testEndpoint WeatherService",
+          "contentType": "text/plain",
+          "contentTypeHint": "DEFAULT",
+          "encoded": false
+        },
+        "headers": {
+          "Content-Type": [
+            "text/plain"
+          ]
+        },
+        "status": 200
+      },
+      "transport": "http",
+      "type": "Synchronous/HTTP"
+    }
+  ],
+  "metadata": {
+    "pact-jvm": {
+      "version": "4.6.17"
+    },
+    "pactSpecification": {
+      "version": "4.0"
+    }
+  },
+  "provider": {
+    "name": "WeatherService"
+  }
+}

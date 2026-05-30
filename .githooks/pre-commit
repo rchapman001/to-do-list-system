@@ -1,0 +1,13 @@
+#!/bin/bash
+echo "Running Spotless to format Java code..."
+
+(cd list-service && ./mvnw spotless:apply) && \
+(cd task-service && ./mvnw spotless:apply) && \
+(cd to-do-list-ui && ./mvnw spotless:apply) && \
+(cd weather-service && ./mvnw spotless:apply) && \
+(cd e2e && ./mvnw spotless:apply)
+
+# Add any modified files to the commit
+git add .
+
+echo "Spotless formatting complete."

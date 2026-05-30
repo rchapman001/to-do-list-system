@@ -1,0 +1,103 @@
+{
+  "consumer": {
+    "name": "WeatherService"
+  },
+  "interactions": [
+    {
+      "description": "GET /gridpoints/MPX/108,72/forecast: Get weather forecast",
+      "key": "a5d850e2",
+      "pending": false,
+      "providerStates": [
+        {
+          "name": "MinneapolisForecastExists"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/gridpoints/MPX/108,72/forecast"
+      },
+      "response": {
+        "body": {
+          "content": {
+            "properties": {
+              "periods": [
+                {
+                  "detailedForecast": "Mostly clear, with a low around 19. North northwest wind 5 to 15 mph, with gusts as high as 30 mph.",
+                  "name": "Tonight",
+                  "temperature": 19,
+                  "windSpeed": "5 to 15 mph"
+                }
+              ]
+            }
+          },
+          "contentType": "application/geo+json",
+          "encoded": false
+        },
+        "headers": {
+          "Content-Type": [
+            "application/geo+json"
+          ]
+        },
+        "matchingRules": {
+          "body": {
+            "$.properties.periods": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 1
+                }
+              ]
+            },
+            "$.properties.periods[*].detailedForecast": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.properties.periods[*].name": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.properties.periods[*].temperature": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "number"
+                }
+              ]
+            },
+            "$.properties.periods[*].windSpeed": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      },
+      "transport": "http",
+      "type": "Synchronous/HTTP"
+    }
+  ],
+  "metadata": {
+    "pact-jvm": {
+      "version": "4.6.17"
+    },
+    "pactSpecification": {
+      "version": "4.0"
+    }
+  },
+  "provider": {
+    "name": "NationalWeatherServiceApi"
+  }
+}

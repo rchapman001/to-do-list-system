@@ -1,0 +1,79 @@
+version: '3.8'
+services:
+
+  to-do-list-db:
+    image: postgres:14
+    environment:
+      - POSTGRES_DB=to_do_list_db
+      - POSTGRES_USER=to_do_list_db_service_user
+      - POSTGRES_PASSWORD=to_do_list_db_service_password
+    volumes:
+      - ./db/01-list-schema.sql:/docker-entrypoint-initdb.d/01-list-schema.sql
+      - ./db/02-task-schema.sql:/docker-entrypoint-initdb.d/02-task-schema.sql
+      # - ./db/03-list-data.sql:/docker-entrypoint-initdb.d/03-list-data.sql
+      # - ./db/04-task-data.sql:/docker-entrypoint-initdb.d/04-task-data.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - microservice-network
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@localhost.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+      - PGADMIN_LISTEN_PORT=5050
+    ports:
+      - '5050:5050'
+    networks:
+      - microservice-network
+
+  list-service:
+    build:
+      context: ./list-service
+    ports:
+      - '8082:8082'
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      - to-do-list-db
+    networks:
+      - microservice-network
+
+  task-service:
+    build:
+      context: ./task-service
+    ports:
+      - '8083:8083'
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      - to-do-list-db
+    networks:
+      - microservice-network
+
+  weather-service:
+    build:
+      context: ./weather-service
+    ports:
+      - '8085:8085'
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    networks:
+      - microservice-network
+
+  to-do-list-ui:
+    build:
+      context: ./to-do-list-ui
+    ports:
+      - '8080:8080'
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      - list-service
+      - task-service
+      - weather-service
+
+networks:
+  microservice-network:
+    driver: bridge

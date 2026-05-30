@@ -1,0 +1,68 @@
+spring:
+  application:
+    name: weather-service
+
+  profiles:
+    active: desktop # Default profile
+
+server:
+  port: 8085
+
+---
+spring:
+  config:
+    activate:
+      on-profile: desktop
+  
+  web:
+    cors:
+      allowed-origins: "http://localhost:8080"
+      allowed-methods: "*"
+      allowed-headers: "*"
+      allow-credentials: true
+
+services:
+  national-weather-service-api:
+    url: https://api.weather.gov/
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  web:
+    cors:
+      allowed-origins: "http://localhost:8080"
+      allowed-methods: "*"
+      allowed-headers: "*"
+      allow-credentials: true
+
+services:
+  national-weather-service-api:
+    url: https://api.weather.gov/
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+
+  web:
+    cors:
+      allowed-origins: "http://localhost:8080"
+      allowed-methods: "*"
+      allowed-headers: "*"
+      allow-credentials: true
+
+services:
+  national-weather-service-api:
+    url: http://localhost:8087
+
+logging:
+  level:
+    au.com.dius.pact.consumer: DEBUG
+    org.springframework.web.reactive.function.client: DEBUG
+    au.com.dius.pact: DEBUG
+    org.apache.http: DEBUG
+    org.springframework.web.reactive.function.client.ExchangeFunctions: DEBUG

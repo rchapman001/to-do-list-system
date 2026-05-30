@@ -1,0 +1,60 @@
+{
+    // TODO: Trying to start services in a specific order
+    "compounds": [
+      {
+        "name": "Start Services in Order",
+        "configurations": 
+          [
+            "Spring Boot-ListServiceApplication<list-service>", 
+            "Spring Boot-TaskServiceApplication<task-service>", 
+            "Spring Boot-WeatherServiceApplication<weather-service>", 
+            "Spring Boot-ToDoListUiApplication<to-do-list-ui>"
+          ],
+      }
+    ],
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ToDoListUiApplication<to-do-list-ui>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.to_do_list_ui.ToDoListUiApplication",
+            "projectName": "to-do-list-ui",
+            "args": "",
+            "vmArgs": "-Dspring.profiles.active=desktop -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=49768 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=to-do-list-ui",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ListServiceApplication<list-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.list_service.ListServiceApplication",
+            "projectName": "list-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=53156 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=list-service"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-TaskServiceApplication<task-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.task_service.TaskServiceApplication",
+            "projectName": "task-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=50595 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=task-service"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-WeatherServiceApplication<weather-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.weather_service.WeatherServiceApplication",
+            "projectName": "weather-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

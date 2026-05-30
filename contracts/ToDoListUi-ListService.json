@@ -1,0 +1,370 @@
+{
+  "consumer": {
+    "name": "ToDoListUi"
+  },
+  "interactions": [
+    {
+      "description": "GET /lists: GetAllToDoLists",
+      "key": "e75649fd",
+      "pending": false,
+      "providerStates": [
+        {
+          "name": "DatabaseError"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/lists"
+      },
+      "response": {
+        "body": {
+          "content": {
+            "message": "An unexpected error occurred: java.lang.NullPointerException"
+          },
+          "contentType": "application/json",
+          "encoded": false
+        },
+        "headers": {
+          "Content-Type": [
+            "application/json"
+          ]
+        },
+        "matchingRules": {
+          "body": {
+            "$.message": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
+        "status": 500
+      },
+      "transport": "http",
+      "type": "Synchronous/HTTP"
+    },
+    {
+      "description": "POST /lists: Invalid request to create a new list",
+      "key": "67ead8ce",
+      "pending": false,
+      "providerStates": [
+        {
+          "name": "InvalidToDoListCreateRequest"
+        }
+      ],
+      "request": {
+        "body": {
+          "content": {
+            "list": "Test List 1"
+          },
+          "contentType": "application/json",
+          "encoded": false
+        },
+        "headers": {
+          "Content-Type": [
+            "application/json"
+          ]
+        },
+        "matchingRules": {
+          "body": {
+            "$.list": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
+        "method": "POST",
+        "path": "/lists"
+      },
+      "response": {
+        "body": {
+          "content": {
+            "message": "An unexpected error occurred: "
+          },
+          "contentType": "application/json",
+          "encoded": false
+        },
+        "headers": {
+          "Content-Type": [
+            "application/json"
+          ]
+        },
+        "matchingRules": {
+          "body": {
+            "$.message": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
+        "status": 500
+      },
+      "transport": "http",
+      "type": "Synchronous/HTTP"
+    },
+    {
+      "description": "GET /lists/test: GetTestEndpoint",
+      "key": "9f2d20a9",
+      "pending": false,
+      "providerStates": [
+        {
+          "name": "ListServiceTest"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/lists/test"
+      },
+      "response": {
+        "body": {
+          "content": "testEndpoint ListService",
+          "contentType": "text/plain",
+          "contentTypeHint": "DEFAULT",
+          "encoded": false
+        },
+        "headers": {
+          "Content-Type": [
+            "text/plain"
+          ]
+        },
+        "status": 200
+      },
+      "transport": "http",
+      "type": "Synchronous/HTTP"
+    },
+    {
+      "description": "DELETE /lists/4: Request to delete a list that doesn't exist",
+      "key": "ccb4a929",
+      "pending": false,
+      "providerStates": [
+        {
+          "name": "NoToDoListsExistDeleteRequest"
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "path": "/lists/4"
+      },
+      "response": {
+        "body": {
+          "content": {
+            "message": "ToDoList 4 not found"
+          },
+          "contentType": "application/json",
+          "encoded": false
+        },
+        "headers": {
+          "Content-Type": [
+            "application/json"
+          ]
+        },
+        "matchingRules": {
+          "body": {
+            "$.message": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
+        "status": 404
+      },
+      "transport": "http",
+      "type": "Synchronous/HTTP"
+    },
+    {
+      "description": "GET /lists: GetAllToDoLists",
+      "key": "bb1f1101",
+      "pending": false,
+      "providerStates": [
+        {
+          "name": "NoToDoListsExist"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/lists"
+      },
+      "response": {
+        "body": {
+          "content": [
+
+          ],
+          "contentType": "application/json",
+          "encoded": false
+        },
+        "headers": {
+          "Content-Type": [
+            "application/json"
+          ]
+        },
+        "status": 200
+      },
+      "transport": "http",
+      "type": "Synchronous/HTTP"
+    },
+    {
+      "description": "DELETE /lists/4: Request to delete a list",
+      "key": "df7818a0",
+      "pending": false,
+      "providerStates": [
+        {
+          "name": "ToDoListsExistDeleteRequest"
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "path": "/lists/1"
+      },
+      "response": {
+        "status": 204
+      },
+      "transport": "http",
+      "type": "Synchronous/HTTP"
+    },
+    {
+      "description": "GET /lists: GetAllToDoLists",
+      "key": "591e3902",
+      "pending": false,
+      "providerStates": [
+        {
+          "name": "ToDoListsExist"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/lists"
+      },
+      "response": {
+        "body": {
+          "content": [
+            {
+              "listId": 1,
+              "listName": "Groceries"
+            }
+          ],
+          "contentType": "application/json",
+          "encoded": false
+        },
+        "headers": {
+          "Content-Type": [
+            "application/json"
+          ]
+        },
+        "matchingRules": {
+          "body": {
+            "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 1
+                }
+              ]
+            },
+            "$[*].listId": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ]
+            },
+            "$[*].listName": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      },
+      "transport": "http",
+      "type": "Synchronous/HTTP"
+    },
+    {
+      "description": "POST /lists: Create a new list",
+      "key": "98bf2da4",
+      "pending": false,
+      "providerStates": [
+        {
+          "name": "ValidToDoListCreateRequest"
+        }
+      ],
+      "request": {
+        "body": {
+          "content": {
+            "listName": "Test List 1"
+          },
+          "contentType": "application/json",
+          "encoded": false
+        },
+        "headers": {
+          "Content-Type": [
+            "application/json"
+          ]
+        },
+        "method": "POST",
+        "path": "/lists"
+      },
+      "response": {
+        "body": {
+          "content": {
+            "listId": 2,
+            "listName": "Test List 1"
+          },
+          "contentType": "application/json",
+          "encoded": false
+        },
+        "headers": {
+          "Content-Type": [
+            "application/json"
+          ]
+        },
+        "matchingRules": {
+          "body": {
+            "$.listId": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ]
+            }
+          }
+        },
+        "status": 201
+      },
+      "transport": "http",
+      "type": "Synchronous/HTTP"
+    }
+  ],
+  "metadata": {
+    "pact-jvm": {
+      "version": "4.6.17"
+    },
+    "pactSpecification": {
+      "version": "4.0"
+    }
+  },
+  "provider": {
+    "name": "ListService"
+  }
+}

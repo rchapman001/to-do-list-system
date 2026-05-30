@@ -1,0 +1,12 @@
+{
+    "java.jdt.ls.java.home": "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home",
+    "editor.wordWrap": "wordWrapColumn", // Rewrap setting
+    "editor.wordWrapColumn": 100, // Rewrap setting
+    "editor.rulers": [100], // Rewrap setting
+    "hediet.vscode-drawio.theme": "Kennedy", // Draw.io Integration theme.
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "editor.tabSize": 2,            // Set the default tab size to 4 spaces
+    "editor.insertSpaces": true,    // Use spaces instead of tabs
+    "editor.detectIndentation": false // Prevent auto-detection of indentation
+}

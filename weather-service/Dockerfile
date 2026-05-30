@@ -1,18 +1,19 @@
 # Step 1: Build the application using Maven
-FROM maven:3.8.5-openjdk-17-slim AS build
+FROM maven:3.9-eclipse-temurin-17 AS build
+
 WORKDIR /app
+
 COPY . .
+
 RUN mvn clean package -DskipTests
 
-# Debugging step to check the contents of /app/target
-RUN ls /app/target
+# Step 2: Create the runtime image
+FROM eclipse-temurin:17-jre
 
-RUN ls /app/src
-
-# Step 2: Create the actual Docker image using the packaged JAR
-FROM openjdk:17
 WORKDIR /app
-# COPY --from=build /app/target/weather-service.jar /app/weather-service.jar
-COPY --from=build /app/target/weather-service-0.0.1-SNAPSHOT.jar /app/weather-service.jar
+
+COPY --from=build /app/target/weather-service-0.0.1-SNAPSHOT.jar weather-service.jar
+
 EXPOSE 8084
-ENTRYPOINT ["java", "-jar", "/app/weather-service.jar"]
+
+ENTRYPOINT ["java", "-jar", "weather-service.jar"]
